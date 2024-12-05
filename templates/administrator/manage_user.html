@@ -1,0 +1,80 @@
+{% extends 'administrator/extn.html' %}
+{% load static %}
+{% block content %}
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <!-- Page title -->
+        
+        
+        <!-- Form Section -->
+        <!-- View Stock Manager Section -->
+        <div class="container-xxl flex-grow-1 container-p-y mt-5">
+            <h4 class="fw-bold py-3 mb-4 text-center" style="color: #ffffff; background: linear-gradient(90deg, #4a90e2, #5cc4c4); padding: 15px; border-radius: 10px;">
+                <span class="text-light fw-light">User Manager /</span> View User
+            </h4>
+
+            <!-- Bootstrap Table -->
+            <div class="card">
+                <div class="table-responsive text-nowrap">
+                    {% for msg in messages %}
+                    <h6 class="text-center text-danger py-2 mb-3" style="background-color: #ffe5e5; border-radius: 10px;">{{msg}}</h6>
+                    {% endfor %}
+                    <table class="table table-hover" style="width: 100%; border-collapse: collapse; font-size: 16px;">
+                        <thead>
+                            <tr style="background-color: #4a90e2; color: #4a90e8;">
+                                <th style="background-color: #4a90e2;">Name</th>
+                                <th style="background-color: #4a90e2;">Age</th>
+                                <th style="background-color: #4a90e2;">Gender</th>
+                                <th style="background-color: #4a90e2;">Address</th>
+                                <th style="background-color: #4a90e2;">Mobile</th>
+                                <th style="background-color: #4a90e2;">Email</th>
+                                <th style="background-color: #4a90e2;">Action </th>
+        
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in user %}
+                            <tr style="transition: background-color 0.3s;">
+                                <td><strong>{{i.name}}</strong></td>
+                                <td>{{i.age}}</td>
+                                <td>{{i.gender}}</td>
+                                <td>{{i.Address}}</td>
+                                <td>{{i.mobile}}</td>
+                                <td>{{i.email}}</td>
+                                <td class="text-center">                                
+                                    <a href="{% url 'delete_user' i.pk %}" class="btn btn-danger" style="border-radius: 8px; background-color: red; transition: all 0.3s ;">Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom JavaScript for form validation -->
+<script>
+    document.getElementById('phone').addEventListener('input', function (e) {
+        var phone = e.target.value;
+        if (!/^\d{10}$/.test(phone)) {
+            e.target.setCustomValidity('Phone number must be 10 digits.');
+        } else {
+            e.target.setCustomValidity('');
+        }
+    });
+
+    document.getElementById('email').addEventListener('input', function (e) {
+        var email = e.target.value;
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+        if (!emailPattern.test(email)) {
+            e.target.setCustomValidity('Please enter a valid email address with lowercase letters after @.');
+        } else {
+            e.target.setCustomValidity('');
+        }
+    });
+</script>
+{% endblock %}

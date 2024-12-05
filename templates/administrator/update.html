@@ -1,0 +1,82 @@
+{% extends 'admin/extn.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+    <link rel="stylesheet" href="{% static 'path/to/bootstrap.min.css' %}">  <!-- Add your Bootstrap CSS path -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #9dc39d, #9dc39d); /* Gradient background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full height for vertical centering */
+            margin: 0;
+            font-family: 'Arial', sans-serif; /* Font family */
+        }
+        .form-container {
+            max-width: 450px; /* Set max width for form */
+            background-color: #ffffff; /* Background for the form */
+            border-radius: 15px; /* Rounded corners */
+            padding: 30px; /* Padding for inner space */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Deeper shadow for depth */
+            transition: transform 0.3s; /* Smooth transform on hover */
+        }
+        .form-container:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+        h4 {
+            color: #466e59; /* Header color */
+            margin-bottom: 20px; /* Space below header */
+            text-align: center; /* Center header */
+        }
+        .form-label {
+            font-weight: bold; /* Make labels bold */
+            color: #466e59; /* Label color */
+        }
+        button {
+            background-color: #466e59; /* Match your preferred color */
+            color: white; /* Button text color */
+            border: none; /* Remove border */
+            border-radius: 25px; /* More rounded button */
+            padding: 12px 20px; /* Padding for button */
+            cursor: pointer; /* Pointer on hover */
+            font-size: 16px; /* Larger font size */
+            transition: background-color 0.3s; /* Smooth transition for background color */
+        }
+        button:hover {
+            background-color: #3b5c4a; /* Darker shade on hover */
+        }
+        input {
+            border: 2px solid #466e59; /* Solid border */
+            border-radius: 5px; /* Slightly rounded corners */
+            padding: 10px; /* Padding for inputs */
+            width: 100%; /* Full width */
+            margin-top: 5px; /* Space above input */
+            transition: border-color 0.3s; /* Smooth border color transition */
+        }
+        input:focus {
+            border-color: #3b5c4a; /* Change border color on focus */
+            outline: none; /* Remove outline */
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h4 class="fw-bold">Update User</h4>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center">
+                <button type="submit">SAVE </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Details</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .modal {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .separator p {
+            margin: 0 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .line {
+            flex-grow: 1;
+            height: 1px;
+            background-color: #ddd;
+        }
+
+        .input_container {
+            margin-bottom: 20px;
+        }
+
+        .input_label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .input_field {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #f7f7f7;
+            color: #333;
+            outline: none;
+        }
+
+        .input_field[readonly] {
+            background-color: #f0f4f8;
+            cursor: not-allowed;
+        }
+
+        .account_details--btn {
+            width: 100%;
+            background-color: #466e59;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .account_details--btn:hover {
+            background-color: #3b5e4d;
+        }
+
+        /* For smaller screens */
+        @media (max-width: 768px) {
+            .modal {
+                padding: 20px;
+            }
+
+            .input_label {
+                font-size: 13px;
+            }
+
+            .input_field {
+                padding: 8px;
+            }
+
+            .account_details--btn {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="modal">
+        <div class="separator">
+            <hr class="line">
+            <p>Account Details</p>
+            <hr class="line">
+        </div>
+        <div class="account-info--form">
+            <div class="input_container">
+                <label class="input_label">ACCOUNT HOLDER NAME</label>
+                <input class="input_field" type="text" name="account_holder_name" value="John Doe" readonly>
+            </div>
+            <div class="input_container">
+                <label class="input_label">ACCOUNT NUMBER</label>
+                <input class="input_field" type="text" name="account_number" value="0000 0000 0000 0000" readonly>
+            </div>
+            <div class="input_container">
+                <label class="input_label">IFSC CODE</label>
+                <input class="input_field" type="text" name="ifsc_code" value="ABC1234XYZ" readonly>
+            </div>
+            <div class="input_container">
+                <label class="input_label">BANK NAME</label>
+                <input class="input_field" type="text" name="bank_name" value="Sample Bank" readonly>
+            </div>
+            <div class="input_container">
+                <label class="input_label">BRANCH NAME</label>
+                <input class="input_field" type="text" name="branch_name" value="Main Branch" readonly>
+            </div>
+            <button class="account_details--btn">Back</button>
+        </div>
+    </div>
+</body>
+</html>

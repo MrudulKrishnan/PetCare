@@ -1,0 +1,76 @@
+{% extends 'administrator/extn.html' %}
+{% load static %}
+{% block content %}
+  <!-- Content wrapper -->
+  <div class="content-wrapper">
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="fw-bold py-3 mb-4 text-center" style="color: #ffffff; background: linear-gradient(90deg, #4a90e2, #5cc4c4); padding: 15px; border-radius: 10px;">
+        <span class="text-light fw-light">Admin home /</span>
+    </h4>
+
+      <!-- Add Category Form -->
+      <div class="row justify-content-center">
+        <div class="col-xxl" style="max-width: 450px; margin: auto; background-color: #f8faf8; border-radius: 8px; padding: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+          <div class="card mb-4" style="border: none;">
+            <div class="card-body">
+              {% for msg in messages %}
+                <div class="alert alert-danger text-center p-2 mb-3" style="border-radius: 8px;">{{ msg }}</div>
+              {% endfor %}
+              
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label class="form-label" for="category-name" style="font-weight: bold;">Category Name</label>
+                  <input type="text" class="form-control" id="category-name" placeholder="Enter Category Name" name="name" required style="border: 1px solid #466e59; border-radius: 4px;" />
+                </div>
+                
+                <div class="row justify-content-end">
+                  <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary" style="background-color: #4a90e2; border: none; border-radius: 5px;">Add Category</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View Category -->
+      <div class="row justify-content-center">
+        <div class="col-xxl" style="max-width: 650px; margin: auto;">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="fw-bold mb-3 text-center"><span class="text-muted fw-light">Manage Category /</span> View Category</h4>
+              
+              {% for msg in messages %}
+                <div class="alert alert-danger text-center p-2 mb-3" style="border-radius: 8px;">{{ msg }}</div>
+              {% endfor %}
+              
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Category Name</th>
+                      <th class="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-border-bottom-0">
+                    {% for i in cate %}
+                      <tr>
+                        <td><i class="fas fa-tag text-success me-2"></i> <strong>{{ i.name }}</strong></td>
+                        <td class="text-end">
+                          <a href="{% url 'delete_category' i.pk %}" class="btn" style="background-color: red; color: white;">Delete</a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

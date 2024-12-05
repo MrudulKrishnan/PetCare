@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Register</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Background and layout */
+        body {
+            background: url('static/assets/img/73977.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Arial', sans-serif;
+            padding: 20px; /* Added padding for small screens */
+            box-sizing: border-box;
+        }
+
+        /* Dark overlay for better text visibility */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-height: 100vh; /* Limit container height */
+            overflow-y: auto; /* Add scroll if content exceeds the container height */
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 12px;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+            border: 1px solid #ccc;
+        }
+
+        .form-control:focus {
+            border-color: #66bb6a;
+            box-shadow: 0 0 8px rgba(102, 187, 106, 0.8);
+        }
+
+        /* Enhanced button */
+        .btn-primary {
+            background: linear-gradient(135deg, #466e59, #28432a);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #66bb6a, #466e59);
+            transform: scale(1.05);
+        }
+
+        .message {
+            color: red;
+            background-color: #d4dab0;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 576px) {
+            .login-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Customer Register</h2>
+        {% for msg in messages %}
+        <div class="message">{{ msg }}</div>
+        {% endfor %}
+        <div id="error-message" style="display:none;color: red; text-align: center;background-color: rgb(227, 228, 223);
+                padding-top: 11px;padding-bottom: 11px;border-radius: 10px;"></div>
+        <form id="registrationForm" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" name="username" id="username" value="{{ username }}" placeholder="Enter your username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" name="name" id="name" value="{{ name }}" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" id="email" value="{{ email }}" placeholder="Enter your Email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" class="form-control" name="phone" id="phone" value="{{ phone }}" placeholder="Enter your Phone" required pattern="\d{10}" title="Phone number must be 10 digits">
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" name="address" id="address" value="{{ address }}" placeholder="Enter your address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" name="password" id="password" minlength="8" placeholder="Enter your password (min 8 characters)" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" class="form-control" name="confirm_password" id="confirmPassword" placeholder="Enter your confirm password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block mt-4">Register</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <p>Already have an account? <a href="{% url 'cus_login' %}">Login here</a></p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js (required for Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Email validation
+        document.getElementById('email').addEventListener('input', function (e) {
+            var email = e.target.value;
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
+            if (!emailPattern.test(email)) {
+                e.target.setCustomValidity('Please enter a valid email address with lowercase letters after @.');
+            } else {
+                e.target.setCustomValidity('');
+            }
+        });
+
+        // Password validation
+        document.getElementById('password').addEventListener('input', function (e) {
+            var password = e.target.value;
+
+            if (password.length < 8) {
+                e.target.setCustomValidity('Password must be at least 8 characters long.');
+            } else {
+                e.target.setCustomValidity('');
+            }
+        });
+
+        // Phone number validation (10 digits)
+        document.getElementById('phone').addEventListener('input', function (e) {
+            var phone = e.target.value;
+
+            if (!/^\d{10}$/.test(phone)) {
+                e.target.setCustomValidity('Phone number must be exactly 10 digits.');
+            } else {
+                e.target.setCustomValidity('');
+            }
+        });
+    </script>
+</body>
+
+</html>

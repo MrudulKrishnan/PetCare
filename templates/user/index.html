@@ -1,0 +1,194 @@
+
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .category-cards {
+display: flex;
+flex-wrap: wrap;
+gap: 20px;
+justify-content: center;
+background-color:rgb(202, 213, 149) ;
+
+}
+
+.card {
+background-color: white;
+border-radius: 100px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+transition: transform 0.3s ease;
+width: 200px;
+text-align: center;
+overflow: hidden;
+}
+
+.card:hover {
+transform: translateY(-10px);
+}
+
+.card-content {
+padding: 20px;
+}
+
+.card h2 {
+font-size: 18px;
+color: #333;
+margin: 0;
+}
+
+@media (max-width: 600px) {
+.card {
+    width: 100%;
+}
+}
+
+</style>
+<div class="category-cards">
+    {% for i in category %}
+    <div class="card">
+        <div class="card-content">
+            <h2>Shop For</h2>
+            <h2>{{ i.name }}</h2>
+            <a href="{% url 'view_pets_products' i.id %}">View</a>
+        </div>
+    </div>
+    {% endfor %}
+</div> 
+    <!-- Hero Start -->
+    <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+        <div class="container py-5">
+            <div class="row justify-content-start">
+                <div class="col-lg-8 text-center text-lg-start">
+                    <h1 class="display-1 text-uppercase text-dark mb-lg-4">Pet Spot</h1>
+                    <h1 style="color: black;" class="text-uppercase  mb-lg-4">"The perfect companion is just a visit away."</h1>
+                    <p style="color: black;" class="fs-4  mb-lg-4">"At Pet Spot, we provide everything you need to keep your pets happy and healthy, from lovable animals to premium food and accessories, all in one place."</p>
+                    <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row gx-5">
+                <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100 rounded" src="{% static 'user/img/about.jpg' %}" style="object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="border-start border-5 border-primary ps-5 mb-5">
+                        <h6 class="text-primary text-uppercase">About Us</h6>
+                        <h1 class="display-5 text-uppercase mb-0">"Your destination for pets, quality food and pet products."</h1>
+                    </div>
+                    <h4 class="text-body mb-4">At Pet Spot, we bring pets, quality food, and accessories together to help your companions thrive in a happy, healthy home.</h4>
+                    <div class="bg-light p-4">
+                        <ul class="nav nav-pills justify-content-between mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item w-50" role="presentation">
+                                <button class="nav-link text-uppercase w-100 active" id="pills-1-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-1" type="button" role="tab" aria-controls="pills-1"
+                                    aria-selected="true">Our Mission</button>
+                            </li>
+                            <li class="nav-item w-50" role="presentation">
+                                <button class="nav-link text-uppercase w-100" id="pills-2-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-2" type="button" role="tab" aria-controls="pills-2"
+                                    aria-selected="false">Our Vission</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-1" role="tabpanel" aria-labelledby="pills-1-tab">
+                                <p class="mb-0">At Pet Spot, our mission is to provide every pet and pet owner with the best care, quality products, and expert advice, ensuring that all pets lead happy, healthy, and fulfilling lives.</p>
+                            </div>
+                            <div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
+                                <p class="mb-0">To be the leading destination for pet lovers, where every pet finds a loving home, and pet owners have access to the best products and services for a happy, healthy life together.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+   
+    <!-- Products Start -->
+   
+    <!-- Products End --> 
+
+    <!-- Services Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="border-start border-5 border-primary ps-5 mb-5" style="max-width: 600px;">
+                <h6 class="text-primary text-uppercase">Services</h6>
+                <h1 class="display-5 text-uppercase mb-0">Our Services are:</h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-md-6">
+                    <div class="service-item bg-light d-flex p-4">
+                        <i class="flaticon-house display-1 text-primary me-4"></i>
+                        <div>
+                            <h5 class="text-uppercase mb-3">Pet Sales</h5>
+                            <p>Offering a variety of pets, from dogs and cats to birds and fishes.</p>
+                            <!-- <a class="text-primary text-uppercase" href="">Read More<i class="bi bi-chevron-right"></i></a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="service-item bg-light d-flex p-4">
+                        <i class="flaticon-food display-1 text-primary me-4"></i>
+                        <div>
+                            <h5 class="text-uppercase mb-3">Pet Foods</h5>
+                            <p>High-quality, nutritious food for all types of pets.</p>
+                            <!-- <a class="text-primary text-uppercase" href="">Read More<i class="bi bi-chevron-right"></i></a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="service-item bg-light d-flex p-4">
+                        <i class="flaticon-grooming display-1 text-primary me-4"></i>
+                        <div>
+                            <h5 class="text-uppercase mb-3">Pet Products</h5>
+                            <p>A wide range of pet products</p>
+                            <!-- <a class="text-primary text-uppercase" href="">Read More<i class="bi bi-chevron-right"></i></a> -->
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-md-6">
+                    <div class="service-item bg-light d-flex p-4">
+                        <i class="flaticon-cat display-1 text-primary me-4"></i>
+                        <div>
+                            <h5 class="text-uppercase mb-3">Pet Training</h5>
+                            <p>Kasd dolor no lorem sit tempor at justo rebum rebum stet justo elitr dolor amet sit</p>
+                            <a class="text-primary text-uppercase" href="">Read More<i class="bi bi-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="service-item bg-light d-flex p-4">
+                        <i class="flaticon-dog display-1 text-primary me-4"></i>
+                        <div>
+                            <h5 class="text-uppercase mb-3">Pet Exercise</h5>
+                            <p>Kasd dolor no lorem sit tempor at justo rebum rebum stet justo elitr dolor amet sit</p>
+                            <a class="text-primary text-uppercase" href="">Read More<i class="bi bi-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="service-item bg-light d-flex p-4">
+                        <i class="flaticon-vaccine display-1 text-primary me-4"></i>
+                        <div>
+                            <h5 class="text-uppercase mb-3">Pet Treatment</h5>
+                            <p>Kasd dolor no lorem sit tempor at justo rebum rebum stet justo elitr dolor amet sit</p>
+                            <a class="text-primary text-uppercase" href="">Read More<i class="bi bi-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- Services End -->
+
+    
+{% endblock %}

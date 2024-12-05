@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9; /* Light background color */
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #4a90e2; /* Blue color */
+            color: white;
+            padding: 15px 20px;
+            text-align: left;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 400px;
+            background: #2c3e50; /* Darker color */
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 60px; /* Adjusted padding */
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+            color: white;
+            transition: all 0.3s ease;
+            border-top-right-radius: 20px; /* Rounded top right corner */
+            border-bottom-right-radius: 20px; /* Rounded bottom right corner */
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 15px 20px;
+            margin: 5px 0;
+            position: relative; /* Added for dropdown positioning */
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.3rem; /* Increased font size */
+            display: block;
+            transition: background 0.4s ease, transform 0.3s ease;
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #34495e; /* Darker hover color */
+            padding-left: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Dropdown Styles */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            left: 100%; /* Position to the right of the parent */
+            top: 0; /* Align to the top */
+            background-color: #34495e; /* Darker dropdown background */
+            min-width: 200px; /* Width of the dropdown */
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 10px; /* Rounded corners */
+            padding: 10px 0; /* Padding for dropdown */
+        }
+
+        .dropdown-content li {
+            float: none; /* Prevent floating */
+            padding: 10px 15px; /* Padding for dropdown items */
+        }
+
+        .dropdown-content li a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            border-radius: 5px; /* Rounded corners for items */
+        }
+
+        .dropdown-content li a:hover {
+            background-color: #1abc9c; /* Light green hover color */
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block; /* Show dropdown on hover */
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 400px; /* Adjusted margin */
+            padding: 80px 20px 20px 20px; /* Adjusted padding */
+            background-color: #ecf0f1; /* Light gray background */
+            height: 100vh; /* Full height */
+            overflow-y: auto; /* Scrollable content */
+        }
+
+        .main-content h2 {
+            color: #4a90e2; /* Blue color */
+            margin-bottom: 40px;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Cards Section */
+        .cards-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .card p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .card a {
+            background-color: #4a90e2; /* Blue color */
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .card a:hover {
+            background-color: #357ab8; /* Darker blue */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>Admin Panel</h1>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="manage_users">Manage Users</a></li>
+            <li><a href="manage_sellers">Manage Sellers</a></li>
+            <li><a href="manage_shop">Manage Shop</a></li>
+            <li><a href="manage_expert">Manage Expert</a></li>
+            <li><a href="add_category">Manage Category</a></li>
+            <li><a href="view_pets_category">View Category</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2>Welcome, Admin</h2>
+        <div class="cards-container">
+            <div class="card">
+                <h3>Card Title 1</h3>
+                <p>Description for card 1.</p>
+                <a href="#">View More</a>
+            </div>
+            <div class="card">
+                <h3>Card Title 2</h3>
+                <p>Description for card 2.</p>
+                <a href="#">View More</a>
+            </div>
+            <div class="card">
+                <h3>Card Title 3</h3>
+                <p>Description for card 3.</p>
+                <a href="#">View More</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

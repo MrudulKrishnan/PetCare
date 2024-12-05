@@ -1,0 +1,155 @@
+ 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .modal {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .separator p {
+            margin: 0 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .line {
+            flex-grow: 1;
+            height: 1px;
+            background-color: #ddd;
+        }
+
+        .input_container {
+            margin-bottom: 20px;
+        }
+
+        .input_label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .input_field {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input_field:focus {
+            border-color: #466e59;
+        }
+
+        .purchase--btn {
+            width: 100%;
+            background-color: #466e59;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .purchase--btn:hover {
+            background-color: #3b5e4d;
+        }
+
+        /* For smaller screens */
+        @media (max-width: 768px) {
+            .modal {
+                padding: 20px;
+            }
+
+            .input_label {
+                font-size: 13px;
+            }
+
+            .input_field {
+                padding: 8px;
+            }
+
+            .purchase--btn {
+                padding: 10px;
+            }
+
+        }
+        .id1{
+          margin-left:50px;
+          margin-bottom:300px;
+        }
+    </style>
+</head>
+<body>
+  
+    <div class="modal">
+        <form  action="{% url 'payment' %}" method="post">
+            {% csrf_token %}
+            <div class="separator">
+                <hr class="line">
+                <p>Proceed To Pay</p>
+                <hr class="line">
+            </div>
+            <div class="credit-card-info--form">
+                <input type="hidden" name="packageid" value="{{packageid}}">
+                <div class="input_container">
+                    <label class="input_label">ACCOUNT NUMBER</label>
+                    <input class="input_field" type="number" name="account_number" title="Input title" placeholder="0000 0000 0000 0000" value="{{account_obj.account_number}}" readonly>
+                </div>
+                <div class="input_container">
+                    <label for="password_field" class="input_label">IFSC CODE</label>
+                    <input class="input_field" type="text" name="IFSC" title="Input title" placeholder="IFSC Code" value="{{account_obj.IFSC}}" readonly>
+                </div>
+                <div class="input_container">
+                    <label for="password_field" class="input_label">AMOUNT</label>
+                    <input class="input_field" type="text" name="amount" title="Input title" placeholder="Amount" value="{{total}}" readonly>
+                </div>
+                <div class="input_container">
+                    <label for="password_field" class="input_label">ENTER YOUR PIN</label>
+                    <input class="input_field" type="password" name="key" title="Input title" placeholder="Enter your PIN" value="{{account_obj.key}}"required>
+                </div>
+                <button class="purchase--btn" type="submit">Submit</button>
+            </div>
+        
+        </form>
+        
+      
+    </div>
+    {% comment %} <div class="id1">
+      <a href="/view_account">View account details</a>
+    </div>    {% endcomment %}
+</body>
+</html>

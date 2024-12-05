@@ -1,0 +1,84 @@
+{% extends 'admin/extn.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<body>
+    <h1>Delivery Boy</h1>
+    <table class="table">
+        <thead>
+          <tr>
+            
+            <th>User Name</th>
+            <th>Boys Name</th>
+            <th>Mobile</th>  
+            <th>Email</th>                  
+            <th>Role</th>
+            
+            
+         
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+        {% for i in boy %}
+          <tr>
+            <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{i.username}}</strong></td>
+            <td>{{i.name}}</td>
+            <td>{{i.mobile}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.role}}</td>
+            
+        
+            <td><a href="{% url 'update_user' i.id %}" class="btn btn-success">Update</a></td>
+            <td><a href="{% url 'delete_boy' i.pk %}" class="btn btn-danger">Delete</a></td>
+
+          </tr>
+      {% endfor %} 
+          
+        </tbody>
+      </table>
+      <h1>Stock Manager</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            
+            <th>User Name</th>
+            <th>Stock Manager Name</th>
+            <th>Mobile</th> 
+            <th>Email</th>                    
+            <th>Role</th>
+            
+            
+         
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+        {% for i in staff %}
+          <tr>
+            <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{i.username}}</strong></td>
+            <td>{{i.name}}</td>
+            <td>{{i.mobile}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.role}}</td>
+            
+            
+            <td><a href="{% url 'update_user' i.id %}" class="btn btn-success">Update</a></td>
+            <td><a href="{% url 'delete_staff' i.pk %}" class="btn btn-danger">Delete</a></td>
+
+          </tr>
+      {% endfor %} 
+          
+        </tbody>
+      </table>
+</body>
+</html>
+{% endblock %}

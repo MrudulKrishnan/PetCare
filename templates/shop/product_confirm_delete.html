@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Delete</title>
+    <style>
+form {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 50px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Paragraph styling */
+p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Style for the submit button */
+button[type="submit"] {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+button[type="submit"]:hover {
+    background-color: #c9302c;
+}
+
+/* Style for the cancel link */
+a {
+    text-decoration: none;
+    color: #5bc0de;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: 1px solid #5bc0de;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a:hover {
+    background-color: #5bc0de;
+    color: #fff;
+}
+</style>
+</head>
+<body>
+    <!-- pet_confirm_delete.html -->
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+    <a href="{% url 'add_product' %}">Cancel</a>
+</form>
+
+</body>
+</html>

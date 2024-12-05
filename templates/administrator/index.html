@@ -1,0 +1,58 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+{% block content %}
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <div class="row">
+                  <!-- Basic Bootstrap Table -->
+              <div class="card">
+                <h5 class="card-header"> All Users</h5>
+                <div class="table-responsive text-nowrap">
+                
+                  <table class="table">
+                    <!-- <thead>
+                      <tr>
+                      <th>UserName</th>
+                      <th>Customer Name</th>
+                        <th>Mobile</th>                     
+                        <th>Place</th>
+                        <th>email</th>
+                        <th>address</th>
+                        <th>photo</th>
+                  
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                    {% for i in user %}
+                      <tr>
+                        <td>{{i.username}}</td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{i.name}}</strong></td>
+                        
+                        <td>{{i.mobile}}</td>
+                        
+                        <td>{{i.place}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.address}}</td>
+                        <td>           
+                            <img src="{{i.imageURL}}" alt="Avatar" class="rounded-circle" width="90px" height="90px" />
+                        </td>
+                      
+                          <td><a href="" class="btn btn-danger">Delete</a></td>
+                      </tr>
+                    {% endfor %}   
+                      
+                    </tbody> -->
+                  </table>
+                </div>
+              </div>
+                </div>
+                
+              
+            </div>
+            
+            <!-- / Content -->
+  {% endblock %}          

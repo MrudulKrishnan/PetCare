@@ -1,0 +1,204 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    
+    <!-- Add Font Awesome for cart icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2c3e50; /* Light background */
+        }
+
+        /* Header for browsing experience */
+        header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin: 0;
+            display: inline-block;
+            color: #333;
+        }
+
+        header input[type="search"] {
+            margin-left: 20px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Card container styling */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px auto;
+            max-width: 1200px; /* Adjusted container size */
+            gap: 20px; /* Space between each card */
+        }
+
+        .card {
+            width: calc(30% - 20px); /* Decreased card size for 3 per row */
+            margin: 10px 0; /* Vertical space between rows */
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Make the image square */
+        .card-image {
+            width: 100%; /* Full width of the card */
+            height: 250px; /* Set the height to 250px to make it square */
+            object-fit: cover; /* Ensures the image covers the container without distortion */
+        }
+
+        .card-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card-content h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card-content p {
+            color: #888;
+        }
+
+        /* No results styling */
+        .no-results {
+            text-align: center;
+            font-size: 18px;
+            color: #999;
+            margin-top: 20px;
+        }
+
+        /* Attractive Add to Cart button */
+        .cart-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #4a90e8, #4a90e8); /* Attractive gradient */
+            color: white;
+            border: none;
+            border-radius: 50px; /* Rounder shape */
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cart-button i {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+        .cart-button:hover {
+            background: linear-gradient(45deg, #218838, #1e7e34); /* Darker gradient on hover */
+            transform: scale(1.1); /* Slight zoom on hover */
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+        }
+
+        /* Footer for spacing */
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pets Section -->
+    <div class="card-container">
+        {% for pet in pets %}
+        <div class="card">
+            <img src="{{ pet.pic.url }}" alt="{{ pet.name }}" class="card-image">
+            <div class="card-content">
+                <h4>{{ pet.name }}</h4>
+                <p><strong>Price:</strong> Rs.{{ pet.price }}</p>
+                {% if user.is_authenticated and user.is_customer %}
+                <form method="post" action="{% url 'add_to_cart' 'pet' pet.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="cart-button">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <button  class="cart-button">
+                        <a href="/pet_booking/{{ pet.id }}">
+                        <i class="fas fa-shopping-cart"></i> Book
+                        <a>
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+       
+        {% endfor %}
+    </div>
+
+    <!-- Products Section -->
+    <div class="card-container">
+        {% for product in products %}
+        <div class="card">
+            <img src="{{ product.pic.url }}" alt="{{ product.name }}" class="card-image">
+            <div class="card-content">
+                <h4>{{ product.name }}</h4>
+                <p><strong>Price:</strong> Rs.{{ product.price }}</p>
+                {% if user.is_authenticated and user.is_customer %}
+                <form method="post" action="{% url 'add_to_cart' 'product' product.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="cart-button">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <!-- <div class="no-results">No products available in this category.</div> -->
+        {% endfor %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Pet Spot. All Rights Reserved.
+    </footer>
+
+</body>
+</html>
+
+{% endblock %}

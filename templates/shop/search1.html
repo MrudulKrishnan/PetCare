@@ -1,0 +1,157 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #2c3e50, #2c3e50);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #4a90e2;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            color: #4a90e2;
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4a90e2;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1; /* Highlight row on hover */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Alternate row color */
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .no-results {
+            text-align: center;
+            font-size: 1.2em;
+            color: #999;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            th, td {
+                font-size: 0.9em;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Search Results for "{{ query }}"</h2>
+
+    {% if error_message %}
+    <div class="error-message">{{ error_message }}</div>
+    {% endif %}
+
+    {% if pet_results %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Age</th>
+                    <th>Description</th>
+                    <th>Color</th>
+                    <th>Stock Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pet in pet_results %}
+                <tr>
+                    <td><img src="{{ pet.pic.url }}" alt="{{ pet.name }}"></td>
+                    <td>{{ pet.name }}</td>
+                    <td>{{ pet.category.name }}</td>
+                    <td>Rs.{{ pet.price }}</td>
+                    <td>{{ pet.age }}</td>
+                    <td>{{ pet.description }}</td>
+                    <td>{{ pet.color }}</td>
+                    <td>{{ pet.stock_level }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    {% if product_results %}
+    <h3>Products</h3>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Stock Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in product_results %}
+                <tr>
+                    <td><img src="{{ product.pic.url }}" alt="{{ product.name }}"></td>
+                    <td>{{ product.name }}</td>
+                    <td>Rs.{{ product.price }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.stock_level }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+</body>
+</html>
+{% endblock %}
